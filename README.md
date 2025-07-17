@@ -141,3 +141,11 @@ This project is licensed under the **MIT License**. You’re free to use, modify
 
 ---
 
+## ⚠️ Note:
+If you encounter "Download Failed" errors, don't worry!
+It’s usually a temporary bug from yt-dlp or YouTube’s end. Just:
+
+✔️ Check the output log for details
+
+🔁 Retry downloading the same resolution 2–3 times by clicking the Download button again
+Most of the time it works after a few retries!
