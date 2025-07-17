@@ -32,7 +32,7 @@ A modern, user-friendly desktop application built using Python and `customtkinte
   ```bash
   pip install yt-dlp customtkinter pillow requests
 
-##🌐 Supported Sites
+## 🌐 Supported Sites
 This downloader supports hundreds of video/audio platforms, including:
 
 YouTube
