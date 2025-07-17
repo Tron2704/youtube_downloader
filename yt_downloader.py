@@ -13,8 +13,7 @@ import tkinter as tk
 from tkinter import messagebox, filedialog
 import time
 
-# Set appearance mode and color theme
-ctk.set_appearance_mode("dark")  # Modes: "system" (default), "dark", "light"
+ctk.set_appearance_mode("dark")  
 
 class ModernYouTubeDownloader:
     def __init__(self):
