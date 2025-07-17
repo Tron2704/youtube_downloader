@@ -8,7 +8,7 @@ A modern, user-friendly desktop application built using Python and `customtkinte
 
 ## 🚀 Features
 
-- ✅ Download videos or extract audio (MP3)
+- ✅ Download videos or extract audio (MP3) (even in 5.1)
 - ✅ Supports 1080p / 4K / 8K and HDR video (where available)
 - ✅ Embed subtitles, metadata, and thumbnails
 - ✅ Modern and clean GUI with light/dark theme toggle
