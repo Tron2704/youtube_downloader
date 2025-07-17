@@ -31,3 +31,21 @@ A modern, user-friendly desktop application built using Python and `customtkinte
 - Required Python libraries:
   ```bash
   pip install yt-dlp customtkinter pillow requests
+
+##🌐 Supported Sites
+This downloader supports hundreds of video/audio platforms, including:
+
+YouTube
+
+Instagram
+
+SonyLIV (Free content up to 1080p)
+
+Zee5 (Free content up to 720p or 1080p)
+
+Twitter/X, Facebook, Vimeo, and many more...
+
+👉 Check all supported sites using:
+
+```bash
+yt-dlp --list-extractors
