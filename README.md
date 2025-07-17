@@ -49,3 +49,54 @@ Twitter/X, Facebook, Vimeo, and many more...
 
 ```bash
 yt-dlp --list-extractors
+
+
+## ⚠️ Known Limitations
+Some videos may fail to download due to:
+
+DRM restrictions
+
+Server-side protection
+
+yt-dlp limitations or bugs
+
+🔄 If a download fails:
+
+Try downloading the same resolution 4–5 times, or switch to a different format.
+
+📦 Also, update yt-dlp regularly:
+
+```bash
+yt-dlp -U
+
+
+## 💡 Tips
+You can choose between video or audio (MP3) download types.
+
+Select the format manually from available resolutions/bitrates.
+
+Use the embedded theme switch to toggle light/dark mode.
+
+Downloads are saved to your default Downloads folder (or the selected output path).
+
+
+## 🧩 Contributions
+Have an idea? Want to fix bugs or add new features?
+
+Fork this repo
+
+Create a feature branch
+
+Submit a pull request
+
+✅ We welcome all contributions!
+
+## 📩 Issues & Feedback
+If you encounter a bug or need help:
+
+Open an issue on GitHub
+
+Or suggest improvements/enhancements
+
+## 📜 License
+This project is open-source and free to use under the MIT License.
