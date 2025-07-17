@@ -141,21 +141,3 @@ This project is licensed under the **MIT License**. You’re free to use, modify
 
 ---
 
-## 🙌 Special Thanks
-
-* [yt-dlp](https://github.com/yt-dlp/yt-dlp)
-* [FFmpeg](https://ffmpeg.org/)
-* [CustomTkinter](https://github.com/TomSchimansky/CustomTkinter)
-* [Pillow](https://pillow.readthedocs.io/)
-
----
-
-```
-
----
-
-Let me know if you'd like:
-- A matching `requirements.txt`
-- `.gitignore` for PyInstaller builds
-- Or help turning this into a `.exe` for easy use on Windows!
-```
