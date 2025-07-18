@@ -13,7 +13,8 @@ import tkinter as tk
 from tkinter import messagebox, filedialog
 import time
 
-ctk.set_appearance_mode("dark")  
+# Set appearance mode and color theme
+ctk.set_appearance_mode("dark")  # Modes: "system" (default), "dark", "light"
 
 class ModernYouTubeDownloader:
     def __init__(self):
@@ -603,16 +604,49 @@ class ModernYouTubeDownloader:
                 "full": line,
             }
             
-            # Classify as audio or video
-            # Audio-only formats have vcodec="none" or contain "audio only"
-            if vcodec == "none" or "audio only" in line.lower() or (resolution == "audio only"):
+            # Improved audio/video classification
+            is_audio_only = (
+                vcodec == "none" or 
+                "audio only" in line.lower() or 
+                resolution == "audio only" or
+                ext in ['m4a', 'mp3', 'aac', 'ogg', 'opus', 'wav'] or
+                (resolution == "N/A" and acodec != "none" and acodec != "unknown")
+            )
+            
+            is_video_only = (
+                acodec == "none" or 
+                "video only" in line.lower() or
+                (resolution != "audio only" and resolution != "N/A" and acodec == "none")
+            )
+            
+            # Classify formats
+            if is_audio_only:
                 self.formats_data["audio"].append(format_info)
-            else:
+            elif is_video_only or (resolution != "audio only" and resolution != "N/A"):
                 self.formats_data["video"].append(format_info)
+            else:
+                # If unclear, check if it has both video and audio
+                if acodec != "none" and vcodec != "none":
+                    self.formats_data["video"].append(format_info)
+                elif acodec != "none":
+                    self.formats_data["audio"].append(format_info)
         
         # Sort formats
         self.formats_data["video"].sort(key=lambda x: self.get_resolution_sort_key(x["resolution"]), reverse=True)
         self.formats_data["audio"].sort(key=lambda x: self.extract_bitrate_value(x["abr"]), reverse=True)
+
+
+    def extract_bitrate_value(self, bitrate_str):
+        """Extract numeric bitrate value for sorting"""
+        if not bitrate_str or bitrate_str == "N/A":
+            return 0
+        
+        # Extract numeric value from strings like "128k", "192k", etc.
+        match = re.search(r'(\d+)', bitrate_str)
+        if match:
+            return int(match.group(1))
+        
+        return 0
 
     def extract_resolution_from_line(self, line):
         """Extract resolution from format line"""
@@ -825,19 +859,14 @@ class ModernYouTubeDownloader:
                 cmd = ['yt-dlp']
 
                 if self.download_type.get() == "video":
-                    # Get selected video format ID
-                    video_format = format_id
-
-                    # Automatically get best audio format from parsed formats
-                    audio_formats = self.formats_data.get('audio', [])
-                    if audio_formats:
-                        best_audio = audio_formats[0]['id']  # assuming list is sorted, or take highest bitrate if needed
-                        format_string = f"{video_format}+{best_audio}"
-                    else:
-                        format_string = video_format  # fallback to just video if audio missing
+                    # Use selected video format ID + best audio
+                    # This handles cases where format IDs are not numeric
+                    selected_format = format_id
+                    format_string = f"{selected_format}+bestaudio/best"
                     cmd += ['-f', format_string]
                 else:  # audio download
-                    cmd += ['-f', format_id, '--extract-audio', '--audio-format', 'mp3']
+                    cmd += ['-f', 'bestaudio', '--extract-audio', '--audio-format', 'mp3']
+                
                 # Common options
                 cmd += [
                     '--embed-subs',
@@ -845,7 +874,7 @@ class ModernYouTubeDownloader:
                     '--embed-metadata',
                     '--embed-thumbnail',
                     '-o', os.path.join(output_dir, '%(title)s.%(ext)s'),
-                    url
+                   url
                 ]
 
                 
